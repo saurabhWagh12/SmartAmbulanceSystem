@@ -39,8 +39,6 @@ Utilize machine learning models to predict ambulance availability and demand pat
 8. Automated Notifications/Alerts:
 Provide automated notifications to users, dispatchers, and ambulance crews throughout the booking and response process, keeping all parties informed of the status and ETA(Estimated Time of Arrival) of the ambulance.
 
-9. Feedback and Reporting System: 
-Include a feedback and reporting system for users to provide feedback on their experience with the ambulance service and report any issues or concerns encountered.
 
 # TechStack Required:
 ## Frontend Development:
@@ -54,7 +52,8 @@ Authentication: JSON Web Tokens (JWT) or OAuth for user authentication and autho
 ## Database Management:
 Relational Database: SQLite for storing structured data related to users, ambulances, and bookings.
 
-Geolocation Services: Maps API for geolocation services and displaying ambulance locations.
+## Geolocation
+Geolocation Services: Maps API(leaflet) for geolocation services and displaying ambulance locations.
 
 ## Cloud Services:
 Document Storage: Firebase Storage for storing and managing uploaded documents.
