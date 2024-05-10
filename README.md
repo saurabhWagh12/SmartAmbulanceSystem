@@ -67,10 +67,10 @@ Package Management: npm (Node Package Manager) or Yarn for managing project depe
 # Basic Workflow 
 
 1. Firstly you enter a landing page, if you are a user, click on book an ambulance, else goto login/registration. 
-2. Once you click it, you get 3 options, choose whether you are a driver, individual ambulance provider or a flit owner(the one who gives ambulances on rent).
+2. Once you click it, you get 3 options, choose whether you are a driver, individual ambulance provider or a fleet owner(the one who gives ambulances on rent).
 3. When a user need an ambulance, he/she will get options about which ambulance he needs(i.e. specific features and rates of the ambulance would be provided).
 4. User books the ambulance and does the payment.
-5. If the ambulance is of flit owner, then a free driver would be matched with a free ambulance, and the ambulance would be dispatched to the place.
+5. If the ambulance is of fleet owner, then a free driver would be matched with a free ambulance, and the ambulance would be dispatched to the place.
 6. The ambulance with nearest location of the needy will be found and hence the ambulance will proceed accordingly.
 7. So, this is the Smart Ambulance Facility - Ambula (your ambulance Ola).
 
