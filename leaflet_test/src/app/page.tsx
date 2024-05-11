@@ -2,6 +2,7 @@ import dynamic from "next/dynamic";
 import { useMemo } from "react";
 
 export default async function Page() {
+    // https://andresprieto-25116.medium.com/how-to-use-react-leaflet-in-nextjs-with-typescript-surviving-it-21a3379d4d18
     const Map = useMemo(() => dynamic(
         () => import('@/components/Map'),
         {
