@@ -26,6 +26,7 @@ class Driver(models.Model):
     license = models.FileField(upload_to='liscance/',null=False,blank=False)
     underFleet = models.ForeignKey(Fleet_Owner,on_delete=models.CASCADE,null=True,blank=True,default=None)
     busy = models.BooleanField(default=False)
+    loggedIn = models.BooleanField(default=False)
     def __str__(self):
         return self.user.username
     

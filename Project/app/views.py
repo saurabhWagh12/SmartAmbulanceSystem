@@ -24,6 +24,7 @@ def createUser(request):
 @api_view(['POST'])
 def registerDriver(request):
     try:
+        print(request.data)
         user = createUser(request)
         if user is None:
             return Response({'status':400,'message':'User Already Exists'})
