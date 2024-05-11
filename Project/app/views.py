@@ -38,6 +38,7 @@ def registerDriver(request):
             driver.save()
             return Response({'status':200,'message':'Driver Data Saved Successfully'})
         else:
+            user.delete()
             return Response({'status':400,'message':'Missing phone_number or license in request'})
     
     except Exception as e:
@@ -70,6 +71,7 @@ def registerIndividual(request):
             indi.save()
             return Response({'status':200,'message':'Individual Owner Created Successfully'})
         else:
+            user.delete()
             return Response({'status':400,'message':'Missing Information'})
     except Exception as e:
         user.delete()

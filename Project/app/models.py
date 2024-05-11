@@ -23,7 +23,7 @@ class Fleet_Owner(models.Model):
 class Driver(models.Model):
     user = models.OneToOneField(User,on_delete=models.CASCADE,null=False,blank=False)
     phone_number = PhoneNumberField(null=False,blank=False)
-    license = models.FileField(upload_to='liscance/',null=False,blank=False)
+    license = models.FileField(upload_to='liscance/',null=True,blank=True)
     underFleet = models.ForeignKey(Fleet_Owner,on_delete=models.CASCADE,null=True,blank=True,default=None)
     busy = models.BooleanField(default=False)
     loggedIn = models.BooleanField(default=False)
