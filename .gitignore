@@ -1,3 +1,4 @@
 node_modules
 .direnv
 .next
+__pycache__
