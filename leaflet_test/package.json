@@ -11,6 +11,7 @@
   "dependencies": {
     "@maptiler/geocoding-control": "^1.2.3",
     "@maptiler/leaflet-maptilersdk": "^2.0.0",
+    "@material-ui/core": "^4.12.4",
     "leaflet": "^1.9.4",
     "leaflet-defaulticon-compatibility": "^0.1.2",
     "maplibre-gl": "^4.2.0",
