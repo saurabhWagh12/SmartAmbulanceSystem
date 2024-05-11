@@ -7,6 +7,7 @@ import type { MapController } from "@maptiler/geocoding-control/types";
 import "@maptiler/geocoding-control/style.css";
 import maplibregl, { GeolocateControl, Marker, Popup } from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
+import "./page.css"
 
 export default function Page() {
   const apiKey = "CCCHWfgPGpwfSG6DPf51";
