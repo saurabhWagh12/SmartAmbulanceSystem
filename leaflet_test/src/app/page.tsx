@@ -11,6 +11,7 @@ import "./page.css";
 import "./Banner.css";
 import "./Book.css";
 import { Button } from "@material-ui/core";
+import { MaiHuMap } from "./map";
 // import { Book } from "src/components/Book";
 
 export default function Page() {
@@ -25,37 +26,9 @@ export default function Page() {
       return;
     }
 
-    const map = new maplibregl.Map({
-      style: `https://api.maptiler.com/maps/streets/style.json?key=${apiKey}`,
-      container: mapContainerRef.current,
-    });
-    console.log(map);
-    map.on("dblclick", (e) => {
-      let m = new Marker({ color: "#ff0000" });
-      var popup = new Popup()
-        .setText("Description")
-        .addClassName("marker-popup")
-        .addTo(map);
-      m.setPopup(popup);
-      m.setLngLat([e.lngLat.lng, e.lngLat.lat]).setDraggable(true).addTo(map);
-      m.addClassName("marker");
-      m.getElement().addEventListener("click", (e) => {
-        console.log("clicked");
-      });
-    });
-    let geolocate = new GeolocateControl({
-      positionOptions: {
-        enableHighAccuracy: true,
-      },
-      trackUserLocation: true,
-    });
-    map.addControl(geolocate);
-    let controller = createMapLibreGlMapController(map, maplibregl);
-    // controller.setEventHandler(e => {
-    //   console.log(e)
-    // })
+    const maihumap = new MaiHuMap(mapContainerRef.current);
 
-    setMapController(controller);
+    setMapController(maihumap.controller);
   }, []);
 
   const labelStyle: React.CSSProperties = {
