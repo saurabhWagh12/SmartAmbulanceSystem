@@ -24,26 +24,29 @@ def createUser(request):
 @api_view(['POST'])
 def registerDriver(request):
     try:
-        print(request.data)
         user = createUser(request)
         if user is None:
-            return Response({'status':400,'message':'User Already Exists'})
+            return Response({'status': 400, 'message': 'User Already Exists'})
 
-        if 'phone_number' in request.data and 'license' in request.FILES:
+        if 'phone_number' in request.data and 'licence' in request.FILES:
+            phone_number = request.data['phone_number']
+            licence_file = request.FILES['licence']
+
+            # Create the Driver object and save it
             driver = Driver.objects.create(
-                    user=user,
-                    phone_number=request.data['phone_number'],
-                    license=request.FILES['license'],
-                )
+                user=user,
+                phone_number=phone_number,
+                license=licence_file,  # Use the uploaded file directly
+            )
             driver.save()
-            return Response({'status':200,'message':'Driver Data Saved Successfully'})
+            return Response({'status': 200, 'message': 'Driver Data Saved Successfully'})
         else:
             user.delete()
-            return Response({'status':400,'message':'Missing phone_number or license in request'})
-    
+            return Response({'status': 400, 'message': 'Missing phone_number or licence in request'})
     except Exception as e:
         user.delete()
-        return Response({'status':400,'message':str(e)})
+        return Response({'status': 400, 'message': str(e)})
+
 
 @api_view(['POST'])
 def registerFleetOwner(request):
@@ -64,10 +67,15 @@ def registerFleetOwner(request):
 def registerIndividual(request):
     try:
         user = createUser(request)
+        # print(request.data)
         if user is None:
             return Response({'status':400,'message':'User Already Exists'})
-        if 'phone_number' in request.data and 'license' in request.FILES and 'vehicle_number' in request.data and 'documents' in request.FILES and 'cost' in request.data and 'type' in request.data:
-            indi = Individual_Owner(user=user,phone_number=request.data['phone_number'],license=request.data['license'],vehicle_number=request.data['vehicle_number'],cost=request.data['cost'],type=request.data['type'],documents=request.data['documents'],city=str(request.data['city']).lower())
+        # if 'phone_number' in request.data and 'license' in request.FILES and 'vehicle_number' in request.data and 'documents' in request.FILES and 'cost' in request.data and 'type' in request.data:
+        if True:
+            phone_number = request.data['phone_number']
+            licence_file = request.FILES['licence']
+            docs = request.FILES['documents']
+            indi = Individual_Owner(user=user,phone_number=phone_number,license=licence_file,vehicle_number=request.data['vehicle_number'],cost=request.data['cost'],type=request.data['type'],documents=docs,city=str(request.data['city']).lower())
             indi.save()
             return Response({'status':200,'message':'Individual Owner Created Successfully'})
         else:
