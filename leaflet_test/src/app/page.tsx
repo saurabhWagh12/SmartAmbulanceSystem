@@ -24,8 +24,21 @@ export default function Page() {
       style: `https://api.maptiler.com/maps/streets/style.json?key=${apiKey}`,
       container: mapContainerRef.current,
     });
+    console.log(map)
+    map.on('dblclick', (e) => {
+      // console.log(e)
+      // let p = map.queryRenderedFeatures()
+      // console.log(p)
+      // console.log(controller)
+      // console.log(controller.getCenterAndZoom())
+      let cpz = controller.getCenterAndZoom();
+    })
+    let controller = createMapLibreGlMapController(map, maplibregl);
+    // controller.setEventHandler(e => {
+    //   console.log(e)
+    // })
 
-    setMapController(createMapLibreGlMapController(map, maplibregl));
+    setMapController(controller);
   }, []);
 
   return (
