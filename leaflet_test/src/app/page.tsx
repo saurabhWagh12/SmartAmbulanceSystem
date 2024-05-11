@@ -36,14 +36,16 @@ export default function Page() {
       // let cpz = controller.getCenterAndZoom();
 
       let m = new Marker({ color: "#ff0000"})
-      // var popup = new Popup()
-      // .setText('Description')
-      // .addTo(map);
-      // m.setPopup(popup)
+      var popup = new Popup()
+      .setText('Description')
+      .addClassName('marker-popup')
+      .addTo(map);
+      m.setPopup(popup)
       m
         .setLngLat([e.lngLat.lng, e.lngLat.lat])
         .setDraggable(true)
         .addTo(map)
+      m.addClassName('marker')
       m.getElement().addEventListener('click', (e) => {
         console.log("clicked")
       })
