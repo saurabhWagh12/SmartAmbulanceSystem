@@ -97,15 +97,37 @@ class MaiHuMap {
 
     add_ambulance(marks: Array<Marked>) {
         this.ambulance_markers = [...this.ambulance_markers, ...marks];
-        for (let m of marks) {
+        for (let i = 0; i < marks.length; i++) {
+            let m = marks[i];
+            m.color = '#449944';
+            m.selected_color = '#00ff00';
             m.deselect(this.map);
+            m.marker?.getElement()
+                .addEventListener('click', (e) => {
+                    if (this.active_ambulance != null) {
+                        marks[this.active_ambulance].deselect(this.map);
+                    }
+                    m.select(this.map);
+                    this.active_ambulance = i;
+                });
         }
     }
 
     add_hospital(marks: Array<Marked>) {
         this.hospital_markers = [...this.hospital_markers, ...marks];
-        for (let m of marks) {
+        for (let i = 0; i < marks.length; i++) {
+            let m = marks[i];
+            m.color = '#444490';
+            m.selected_color = '#0000ff';
             m.deselect(this.map);
+            m.marker?.getElement()
+                .addEventListener('click', (e) => {
+                    if (this.active_ambulance != null) {
+                        marks[this.active_ambulance].deselect(this.map);
+                    }
+                    m.select(this.map);
+                    this.active_ambulance = i;
+                });
         }
     }
 }
