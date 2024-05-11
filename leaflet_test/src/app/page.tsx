@@ -5,7 +5,7 @@ import { GeocodingControl } from "@maptiler/geocoding-control/react";
 import { createMapLibreGlMapController } from "@maptiler/geocoding-control/maplibregl-controller";
 import type { MapController } from "@maptiler/geocoding-control/types";
 import "@maptiler/geocoding-control/style.css";
-import maplibregl from "maplibre-gl";
+import maplibregl, { GeolocateControl, Marker, Popup } from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
 
 export default function Page() {
@@ -31,8 +31,29 @@ export default function Page() {
       // console.log(p)
       // console.log(controller)
       // console.log(controller.getCenterAndZoom())
-      let cpz = controller.getCenterAndZoom();
+
+      // let cpz = controller.getCenterAndZoom();
+
+      let m = new Marker({ color: "#ff0000"})
+      // var popup = new Popup()
+      // .setText('Description')
+      // .addTo(map);
+      // m.setPopup(popup)
+      m
+        .setLngLat([e.lngLat.lng, e.lngLat.lat])
+        .setDraggable(true)
+        .addTo(map)
+      m.getElement().addEventListener('click', (e) => {
+        console.log("clicked")
+      })
     })
+    let geolocate = new GeolocateControl({
+      positionOptions: {
+        enableHighAccuracy: true
+      },
+      trackUserLocation: true
+    });
+    map.addControl(geolocate)
     let controller = createMapLibreGlMapController(map, maplibregl);
     // controller.setEventHandler(e => {
     //   console.log(e)
