@@ -24,6 +24,7 @@ class DriverSerializer(serializers.ModelSerializer):
     class Meta:
         model = Driver
         fields = '__all__'
+        depth = 1
 
 class Fleet_OwnerSerializer(serializers.ModelSerializer):
     class Meta:

@@ -35,8 +35,9 @@ def registerDriver(request):
             # Create the Driver object and save it
             driver = Driver.objects.create(
                 user=user,
+                underFleet=Fleet_Owner.objects.get(user=User.objects.get(username=request.data['underFleet'])), 
                 phone_number=phone_number,
-                license=licence_file,  # Use the uploaded file directly
+                license=licence_file, 
             )
             driver.save()
             return Response({'status': 200, 'message': 'Driver Data Saved Successfully'})
@@ -212,15 +213,21 @@ def getIndividualDetails(request):
 def addAmbulance(request):
     try:
         try:
-            user = Fleet_Owner.objects.get(user=User.objects.get(username=request.data['username']))
+            u = request.data['username']
+            user = Fleet_Owner.objects.get(user=User.objects.get(username=u))
             if 'vehicle_number' in request.data and 'documents' in request.FILES and 'cost' in request.data and 'type' in request.data:
+            # if True:
+                docs = request.data['documents']
+                type = request.data['type']
+                city = str(request.data['city']).lower().strip().split()[0]
+                vn = request.data['vehicle_number']
                 ambulance = Ambulance.objects.create(
                                         owner=user,
-                                        vehicle_number = request.data['vehicle_number'],
-                                        type = request.data['type'],
+                                        vehicle_number = vn,
+                                        type = type,
                                         cost = request.data['cost'],
-                                        documents = request.data['documents'],
-                                        city=str(request.data['city']).lower().strip().split()[0],
+                                        documents = docs,
+                                        city=city,
                                                  )
                 user.ambulanceCount+=1
                 user.save()
