@@ -29,6 +29,7 @@ class Marked {
         }
         this.is_selected = true;
         this.marker = new Marker({ color: this.selected_color, className: 'marker' });
+        this.marker.setLngLat(this.pos).setDraggable(false)
         this.marker.addTo(map)
     }
 
@@ -38,6 +39,7 @@ class Marked {
         }
         this.is_selected = false;
         this.marker = new Marker({ color: this.color, className: 'marker' });
+        this.marker.setLngLat(this.pos).setDraggable(false)
         this.marker.addTo(map)
     }
 }
