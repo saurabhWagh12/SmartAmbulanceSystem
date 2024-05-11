@@ -110,4 +110,4 @@ class MaiHuMap {
     }
 }
 
-export { MaiHuMap };
+export { MaiHuMap, Marked };
