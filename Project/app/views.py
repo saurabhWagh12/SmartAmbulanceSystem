@@ -133,7 +133,7 @@ class LoginAPI(APIView):
                 }
 
                 token = jwt.encode(payload, 'secret', algorithm='HS256')
-                response = Response({'status': 200, 'token': token})
+                response = Response({'status': 200, 'token': token,'type':type})
 
                 # Set the token as a cookie in the response
                 # response.set_cookie(key='token', value=token)
