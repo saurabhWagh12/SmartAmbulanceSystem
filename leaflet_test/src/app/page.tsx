@@ -2,16 +2,14 @@
 
 import { useEffect, useRef, useState } from "react";
 import { GeocodingControl } from "@maptiler/geocoding-control/react";
-import { createMapLibreGlMapController } from "@maptiler/geocoding-control/maplibregl-controller";
 import type { MapController } from "@maptiler/geocoding-control/types";
 import "@maptiler/geocoding-control/style.css";
-import maplibregl, { GeolocateControl, Marker, Popup } from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
 import "./page.css";
 import "./Banner.css";
 import "./Book.css";
 import { Button } from "@material-ui/core";
-import { MaiHuMap } from "./map";
+import { MaiHuMap, Marked } from "./map";
 // import { Book } from "src/components/Book";
 
 export default function Page() {
@@ -21,12 +19,20 @@ export default function Page() {
 
   const [mapController, setMapController] = useState<MapController>();
 
+  let amb = [
+      new Marked([86.24235484190564, 23.888574912944634]),
+      new Marked([86.24399120296266, 23.74785749340184]),
+      new Marked([86.48494536857703, 23.824223111414298]),
+      new Marked([86.40967837220785, 23.71582737971943]),
+  ];
+
   useEffect(() => {
     if (!mapContainerRef.current) {
       return;
     }
 
     const maihumap = new MaiHuMap(mapContainerRef.current);
+    maihumap.add_ambulance(amb);
 
     setMapController(maihumap.controller);
   }, []);
