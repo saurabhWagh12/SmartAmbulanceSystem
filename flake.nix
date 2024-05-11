@@ -82,6 +82,9 @@
         nodejs_21
         bun
 
+        nodePackages_latest.typescript-language-server
+        tailwindcss-language-server
+
         # redis
         # minikube
         # kubernetes
