@@ -67,7 +67,8 @@ class MaiHuMap {
                 this.patient_marker.remove();
                 this.patient_marker = null;
             }
-            this.patient_marker = new Marker({ color: "#00ff00", className: 'marker' });
+            console.log(e.lngLat)
+            this.patient_marker = new Marker({ color: "#aa4444", className: 'marker' });
             // var popup = new Popup()
             //     .setText('Description')
             //     .addClassName('marker-popup')

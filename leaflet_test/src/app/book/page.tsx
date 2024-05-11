@@ -33,6 +33,7 @@ export default function Page() {
 
     const maihumap = new MaiHuMap(mapContainerRef.current);
     maihumap.add_ambulance(amb);
+    // maihumap.active_hospital(hosp);
 
     setMapController(maihumap.controller);
   }, []);
