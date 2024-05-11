@@ -1,0 +1,51 @@
+.banner_info > button {
+  background-color: #eb8a04;
+  color: black;
+  text-transform: inherit;
+  margin-top: -28px;
+  padding-left: 40px;
+  padding-right: 40px;
+  font-weight: 600;
+  margin-left: 43%;
+}
+
+.booking_fields {
+  margin-top: 50px;
+}
+
+.container {
+  width: 70%;
+  margin-left: 15%;
+  margin-top: 2%;
+  /* background-color: red; */
+  height: 367px;
+}
+
+.container .pickup {
+  color: black;
+  margin-left: 7%;
+}
+
+.banner {
+  margin-top: 50px;
+}
+
+/* .booking_fields {
+  display: flex;
+} */
+
+.book_it > h3 {
+  display: flex;
+  align-items: left;
+  justify-content: left;
+  font-family: sans-serif;
+  margin-left: 18%;
+  color: black;
+  margin-top: 0;
+  padding-left: 10px;
+}
+
+h3 > label {
+  margin-left: "13px";
+  font-size: "18px";
+}

@@ -1,0 +1,15 @@
+.book > h1 {
+  display: block;
+  text-align: center;
+  font-size: 25px;
+  margin-top: 22px;
+  color: black;
+}
+
+.book .booking_div > h4 {
+  display: block;
+  text-align: center;
+  font-size: 20px;
+  margin-top: 22px;
+  color: black;
+}
