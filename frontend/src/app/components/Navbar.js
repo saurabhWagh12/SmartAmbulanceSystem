@@ -34,16 +34,16 @@ const Navbar = (props) => {
 
               <div className="text-2xl">
                 <div>
-                    <Link href="/" className="text-black hover:text-gray-300">Home</Link>:<></>
+                    <Link href="/" className="text-black hover:text-gray-300">Home</Link>
                 </div>
                 <div>
-                    <Link href="/about" className="text-black hover:text-gray-300">About</Link>:<></>
+                    <Link href="/about" className="text-black hover:text-gray-300">About</Link>
                 </div>
                 <div>
-                    <Link href="/partners" className="text-black hover:text-gray-300">Partnership</Link>:<></>
+                    <Link href="/partners" className="text-black hover:text-gray-300">Partnership</Link>
                 </div>
                 <div>
-                    <Link href="/" className="text-black hover:text-gray-300">Contact Us</Link>:<></>
+                    <Link href="/" className="text-black hover:text-gray-300">Contact Us</Link>
                 </div>
 
             </div>
