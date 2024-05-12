@@ -11,6 +11,7 @@ import "./page.css";
 import "./Banner.css";
 import "./Book.css";
 import { Button } from "@material-ui/core";
+import React from "react";
 // import { Book } from "src/components/Book";
 
 export default function Page() {
@@ -51,9 +52,6 @@ export default function Page() {
     });
     map.addControl(geolocate);
     let controller = createMapLibreGlMapController(map, maplibregl);
-    // controller.setEventHandler(e => {
-    //   console.log(e)
-    // })
 
     setMapController(controller);
   }, []);
@@ -61,6 +59,70 @@ export default function Page() {
   const labelStyle: React.CSSProperties = {
     marginLeft: "13px",
     fontSize: "18px",
+  };
+
+  const ChangePickup = () => {
+    const [pickupMode, setPickupMode] = useState(true); // State for Pickup
+    return (
+      <>
+        <button onClick={() => setPickupMode(!pickupMode)}>1st Button</button>
+        {pickupMode ? (
+          <h3>
+            <input type="checkbox" id="Pickup"></input>
+            <label htmlFor="Pickup">Pickup</label>
+          </h3>
+        ) : (
+          <h3>
+            <input type="checkbox" id="Pickup" checked></input>
+            <label htmlFor="Pickup">Pickup</label>
+          </h3>
+        )}
+      </>
+    );
+  };
+
+  const ChangeDestination = () => {
+    const [destinationMode, setDestinationMode] = useState(true); // State for Destination
+    return (
+      <>
+        <button onClick={() => setDestinationMode(!destinationMode)}>
+          2nd Button
+        </button>
+        {destinationMode ? (
+          <h3>
+            <input type="checkbox" id="Destination"></input>
+            <label htmlFor="Destination">Destination</label>
+          </h3>
+        ) : (
+          <h3>
+            <input type="checkbox" id="Destination" checked></input>
+            <label htmlFor="Destination">Destination</label>
+          </h3>
+        )}
+      </>
+    );
+  };
+
+  const ChangeAmbulance = () => {
+    const [ambulanceMode, setAmbulanceMode] = useState(true); // State for Ambulance
+    return (
+      <>
+        <button onClick={() => setAmbulanceMode(!ambulanceMode)}>
+          3rd Button
+        </button>
+        {ambulanceMode ? (
+          <h3>
+            <input type="checkbox" id="Ambulance-Type"></input>
+            <label htmlFor="Ambulance-Type">Type of Ambulance</label>
+          </h3>
+        ) : (
+          <h3>
+            <input type="checkbox" id="Ambulance-Type" checked></input>
+            <label htmlFor="Ambulance-Type">Type of Ambulance</label>
+          </h3>
+        )}
+      </>
+    );
   };
 
   return (
@@ -74,24 +136,9 @@ export default function Page() {
               <div className="banner_main_dev">
                 <div className="booking_fields">
                   <div className="book_it">
-                    <h3>
-                      <input type="checkbox" id="Pickup"></input>
-                      <label htmlFor="Pickup" style={labelStyle}>
-                        Pickup
-                      </label>
-                    </h3>
-                    <h3>
-                      <input type="checkbox" id="Pickup"></input>
-                      <label htmlFor="Pickup" style={labelStyle}>
-                        Destination
-                      </label>
-                    </h3>
-                    <h3>
-                      <input type="checkbox" id="Pickup"></input>
-                      <label htmlFor="Pickup" style={labelStyle}>
-                        Type of Ambulance
-                      </label>
-                    </h3>
+                    <ChangePickup />
+                    <ChangeDestination />
+                    <ChangeAmbulance />
                   </div>
                   <div className="container">
                     <div className="pickup">
