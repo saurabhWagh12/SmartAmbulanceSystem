@@ -4,6 +4,7 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia, { cardMediaClasses } from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
+import { useRouter } from 'next/navigation';
 
 const cardStyle = {
   maxWidth: 345,
@@ -41,7 +42,7 @@ export default function ActionAreaCard() {
               Efficiently dispatch advanced life support teams to critical emergencies, ensuring swift and expert medical care.
             </Typography>
           </CardContent>
-          <button className="bg-orange-600 flex items-center justify-center" style={{ color: 'white', padding: '10px 20px', borderRadius: '5px',margin:'auto',marginBottom:'1rem'}}>Book Now</button>
+          <a href={"/book"} className="bg-orange-600 flex items-center justify-center" style={{ color: 'white', padding: '10px 20px', width: '60%', borderRadius: '5px',margin:'auto',marginBottom:'1rem'}}>Book Now</a>
         </CardActionArea>
       </Card>
 
@@ -62,7 +63,7 @@ export default function ActionAreaCard() {
             delivering essential medical aid when every second counts.
             </Typography>
           </CardContent>
-          <button className= "bg-orange-600 flex items-center justify-center" style={{ color: 'white', padding: '10px 20px', borderRadius: '5px',margin:'auto',marginBottom:'1rem'}}>Book Now</button>
+          <a href={"/book"} className="bg-orange-600 flex items-center justify-center" style={{ color: 'white', padding: '10px 20px', width: '60%', borderRadius: '5px',margin:'auto',marginBottom:'1rem'}}>Book Now</a>
         </CardActionArea>
       </Card>
       
@@ -83,7 +84,7 @@ export default function ActionAreaCard() {
             ensuring seamless transition between medical facilities for optimal care continuity.
             </Typography>
           </CardContent>
-          <button className= "bg-orange-600 flex items-center justify-center" style={{ color: 'white', padding: '10px 20px', borderRadius: '5px',margin:'auto',marginBottom:'1rem'}}>Book Now</button>
+          <a href={"/book"} className="bg-orange-600 flex items-center justify-center" style={{ color: 'white', padding: '10px 20px', width: '60%', borderRadius: '5px',margin:'auto',marginBottom:'1rem'}}>Book Now</a>
         </CardActionArea>
       </Card>
       <style>
