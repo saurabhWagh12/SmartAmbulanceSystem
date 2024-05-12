@@ -53,9 +53,16 @@ class MaiHuMap {
     map: maplibregl.Map;
     controller: any;
 
-    constructor(container: HTMLDivElement) {
+    setPickup: any;
+    setDest: any;
+    setAmbulance: any;
+
+    constructor(container: HTMLDivElement, pickup: any, destination: any, ambulance: any) {
         this.ambulance_markers = [];
         this.hospital_markers = [];
+        this.setPickup = pickup;
+        this.setDest = destination;
+        this.setAmbulance = ambulance;
 
         this.map = new maplibregl.Map({
             style: `https://api.maptiler.com/maps/streets/style.json?key=${apiKey}`,
@@ -67,6 +74,7 @@ class MaiHuMap {
                 this.patient_marker.remove();
                 this.patient_marker = null;
             }
+            this.setPickup(true);
             console.log(e.lngLat)
             this.patient_marker = new Marker({ color: "#aa4444", className: 'marker' });
             // var popup = new Popup()
@@ -110,6 +118,7 @@ class MaiHuMap {
                     }
                     m.select(this.map);
                     this.active_ambulance = i;
+                    this.setAmbulance(true);
                 });
         }
     }
@@ -128,6 +137,7 @@ class MaiHuMap {
                     }
                     m.select(this.map);
                     this.active_ambulance = i;
+                    this.setDest(true);
                 });
         }
     }

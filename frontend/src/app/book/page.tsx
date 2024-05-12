@@ -32,6 +32,10 @@ async function get_hospitals() {
 }
 
 export default function Page() {
+  const [pickupMode, setPickupMode] = useState(false);
+  const [destinationMode, setDestinationMode] = useState(false);
+  const [ambulanceMode, setAmbulanceMode] = useState(false);
+
   const apiKey = "CCCHWfgPGpwfSG6DPf51";
 
   const mapContainerRef = useRef<HTMLDivElement>(null);
@@ -46,7 +50,7 @@ export default function Page() {
       return;
     }
 
-    const maihumap = new MaiHuMap(mapContainerRef.current);
+    const maihumap = new MaiHuMap(mapContainerRef.current, setPickupMode, setDestinationMode, setAmbulanceMode);
     // maihumap.add_ambulance(amb);
     // maihumap.active_hospital(hosp);
     amb.then(e => maihumap.add_ambulance(e));
@@ -71,24 +75,39 @@ export default function Page() {
               <div className="banner_main_dev">
                 <div className="booking_fields">
                   <div className="book_it">
-                    <h3>
-                      <input type="checkbox" id="Pickup"></input>
-                      <label htmlFor="Pickup" style={labelStyle}>
-                        Pickup
-                      </label>
-                    </h3>
-                    <h3>
-                      <input type="checkbox" id="Pickup"></input>
-                      <label htmlFor="Pickup" style={labelStyle}>
-                        Destination
-                      </label>
-                    </h3>
-                    <h3>
-                      <input type="checkbox" id="Pickup"></input>
-                      <label htmlFor="Pickup" style={labelStyle}>
-                        Type of Ambulance
-                      </label>
-                    </h3>
+                    {pickupMode ? (
+                      <h3>
+                        <input type="checkbox" id="Pickup" checked></input>
+                        <label htmlFor="Pickup">Pickup</label>
+                      </h3>
+                    ) : (
+                      <h3>
+                        <input type="checkbox" id="Pickup"></input>
+                        <label htmlFor="Pickup">Pickup</label>
+                      </h3>
+                    )}
+                    {destinationMode ? (
+                      <h3>
+                        <input type="checkbox" id="Destination" checked></input>
+                        <label htmlFor="Destination">Destination</label>
+                      </h3>
+                    ) : (
+                      <h3>
+                        <input type="checkbox" id="Destination"></input>
+                        <label htmlFor="Destination">Destination</label>
+                      </h3>
+                    )}
+                    {ambulanceMode ? (
+                      <h3>
+                        <input type="checkbox" id="Ambulance-Type" checked></input>
+                        <label htmlFor="Ambulance-Type">Type of Ambulance</label>
+                      </h3>
+                    ) : (
+                      <h3>
+                        <input type="checkbox" id="Ambulance-Type"></input>
+                        <label htmlFor="Ambulance-Type">Type of Ambulance</label>
+                      </h3>
+                    )}
                   </div>
                   <div className="container">
                     <div className="pickup">
