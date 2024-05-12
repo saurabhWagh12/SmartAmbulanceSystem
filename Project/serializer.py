@@ -39,4 +39,9 @@ class Individual_OwnerSerializer(serializers.ModelSerializer):
 class AmbulanceSerializer(serializers.ModelSerializer):
     class Meta:
         model = Ambulance
+        fields = '__all__'
+
+class HospitalSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Hospital
         fields = '__all__'     

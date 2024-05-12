@@ -280,3 +280,14 @@ def ambulances(request):
         return Response({'status':200,'data':li})
     except Exception as e:
         return Response({'status': 400, 'message': 'Error: ' + str(e)})
+
+@api_view(['GET'])
+def hospital(request):
+    try:
+        hospital = Hospital.objects.all()
+        serializer = HospitalSerializer(hospital, many=True)
+        return Response({ 'status': 200, 'data': serializer.data})
+    except Exception as e:
+        return Response({'status': 400, 'message': 'Error: ' + str(e)})
+    
+    

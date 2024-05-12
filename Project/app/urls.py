@@ -20,6 +20,7 @@ urlpatterns = [
     path('getalldrivers/',getAllDrivers),
 
     path('ambulances/',ambulances),
+    path('hospitals/', hospital),
 ]
 
 urlpatterns+=static(settings.MEDIA_URL,document_root = settings.MEDIA_ROOT)
