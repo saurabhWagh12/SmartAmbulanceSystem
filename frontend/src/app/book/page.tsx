@@ -45,18 +45,20 @@ export default function Page() {
   let amb = get_ambulances();
   let hosp = get_hospitals();
 
+  const [maihumap, setMaihumap] = useState<MaiHuMap | null>(null);
+
   useEffect(() => {
     if (!mapContainerRef.current) {
       return;
     }
-
-    const maihumap = new MaiHuMap(mapContainerRef.current, setPickupMode, setDestinationMode, setAmbulanceMode);
+    let m = new MaiHuMap(mapContainerRef.current, setPickupMode, setDestinationMode, setAmbulanceMode);
+    setMaihumap(m);
     // maihumap.add_ambulance(amb);
     // maihumap.active_hospital(hosp);
-    amb.then(e => maihumap.add_ambulance(e));
-    hosp.then(e => maihumap.add_hospital(e));
+    amb.then(e => m.add_ambulance(e));
+    hosp.then(e => m.add_hospital(e));
 
-    setMapController(maihumap.controller);
+    setMapController(m.controller);
   }, []);
 
   const labelStyle: React.CSSProperties = {
@@ -133,7 +135,13 @@ export default function Page() {
         </div>
         <div className="banner">
           <div className="banner_info">
-            <Button>Book An Ambulance</Button>
+            <Button onClick={() => {
+              if (maihumap === null) {
+                console.log('caaaaant')
+                return;
+              }
+              console.log(maihumap.get_dist())
+            }}>Book An Ambulance</Button>
           </div>
         </div>
       </div>

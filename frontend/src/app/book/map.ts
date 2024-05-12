@@ -1,5 +1,57 @@
 import maplibregl, { GeolocateControl, Marker, Popup } from "maplibre-gl";
 import { createMapLibreGlMapController } from "@maptiler/geocoding-control/maplibregl-controller";
+import axios from 'axios';
+
+function get_dist2(c1: [Number, Number], c2: [Number, Number]) {
+    let request = new XMLHttpRequest();
+
+    request.open('POST', "https://api.openrouteservice.org/v2/directions/driving-car/geojson");
+
+    request.setRequestHeader('Accept', 'application/json, application/geo+json, application/gpx+xml, img/png; charset=utf-8');
+    request.setRequestHeader('Content-Type', 'application/json');
+    request.setRequestHeader('Authorization', '5b3ce3597851110001cf624839b02bf98643452bbd0919c7eb6094be');
+
+    request.onreadystatechange = function() {
+        if (this.readyState === 4) {
+            console.log('Status:', this.status);
+            console.log('Headers:', this.getAllResponseHeaders());
+            console.log('Body:', this.responseText);
+        }
+    };
+
+    const body = { coordinates: [c1.reverse(), c2.reverse()] };
+    const jsonbody = JSON.stringify(body);
+    console.log(jsonbody);
+
+    request.send(jsonbody);
+}
+
+async function get_dist(c1: [Number, Number], c2: [Number, Number]) {
+    const url = "https://api.openrouteservice.org/v2/directions/driving-car/geojson";
+    const body = { coordinates: [c1.reverse(), c2.reverse()] };
+    const headers = {
+        'Accept': 'application/json, application/geo+json, application/gpx+xml, img/png; charset=utf-8',
+        'Content-Type': 'application/json',
+        'Authorization': '5b3ce3597851110001cf624839b02bf98643452bbd0919c7eb6094be',
+    };
+
+    let resp = await axios.post(url, body, { headers: headers });
+    console.log(resp);
+    return resp;
+}
+
+function get_dist3(lat1, lon1, lat2, lon2) {
+    const R = 6371; // Radius of the Earth in kilometers
+    const dLat = (lat2 - lat1) * Math.PI / 180;  // Convert degrees to radians
+    const dLon = (lon2 - lon1) * Math.PI / 180;
+    const a =
+        Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+        Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+        Math.sin(dLon / 2) * Math.sin(dLon / 2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    const distance = R * c; // Distance in kilometers
+    return distance;
+}
 
 const apiKey = "CCCHWfgPGpwfSG6DPf51";
 
@@ -114,7 +166,7 @@ class MaiHuMap {
             m.marker?.getElement()
                 .addEventListener('click', (e) => {
                     if (this.active_ambulance != null) {
-                        marks[this.active_ambulance].deselect(this.map);
+                        this.ambulance_markers[this.active_ambulance].deselect(this.map);
                     }
                     m.select(this.map);
                     this.active_ambulance = i;
@@ -132,14 +184,32 @@ class MaiHuMap {
             m.deselect(this.map);
             m.marker?.getElement()
                 .addEventListener('click', (e) => {
-                    if (this.active_ambulance != null) {
-                        marks[this.active_ambulance].deselect(this.map);
+                    if (this.active_hospital != null) {
+                        this.hospital_markers[this.active_hospital].deselect(this.map);
                     }
                     m.select(this.map);
-                    this.active_ambulance = i;
+                    this.active_hospital = i;
                     this.setDest(true);
                 });
         }
+    }
+
+    get_dist() {
+        if (this.active_ambulance === null || this.active_hospital === null || this.patient_marker === null) {
+            throw Error('helo');
+        }
+        const p1 = this.ambulance_markers[this.active_ambulance].marker?.getLngLat();
+        const p2 = this.hospital_markers[this.active_hospital].marker?.getLngLat();
+        const p3 = this.patient_marker.getLngLat();
+
+        if (typeof p1 === 'undefined' || typeof p2 === 'undefined') {
+            throw Error('helo');
+        }
+
+        // const d1 = get_dist2([p1.lng, p1.lat], [p2.lng, p2.lat]);
+        const d1 = get_dist3(p1.lat, p1.lng, p3.lat, p3.lng);
+        const d2 = get_dist3(p3.lat, p3.lng, p2.lat, p2.lng);
+        return d1 + d2;
     }
 }
 
