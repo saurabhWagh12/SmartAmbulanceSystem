@@ -11,6 +11,25 @@ import "./Book.css";
 import { Button } from "@material-ui/core";
 import { MaiHuMap, Marked } from "./map";
 // import { Book } from "src/components/Book";
+import axios from "axios";
+
+async function get_ambulances() {
+  try {
+    const resp = await axios.get("http://localhost:8000/ambulances");
+    return resp.data.data.map((e: any) => new Marked([e[0], e[1]], e[4]))
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+async function get_hospitals() {
+  try {
+    const resp = await axios.get("http://localhost:8000/hospitals");
+    return resp.data.data.map((e: any) => new Marked([e.longi, e.lati], e.name))
+  } catch (error) {
+    console.log(error);
+  }
+}
 
 export default function Page() {
   const apiKey = "CCCHWfgPGpwfSG6DPf51";
@@ -19,12 +38,8 @@ export default function Page() {
 
   const [mapController, setMapController] = useState<MapController>();
 
-  let amb = [
-      new Marked([86.24235484190564, 23.888574912944634]),
-      new Marked([86.24399120296266, 23.74785749340184]),
-      new Marked([86.48494536857703, 23.824223111414298]),
-      new Marked([86.40967837220785, 23.71582737971943]),
-  ];
+  let amb = get_ambulances();
+  let hosp = get_hospitals();
 
   useEffect(() => {
     if (!mapContainerRef.current) {
@@ -32,8 +47,10 @@ export default function Page() {
     }
 
     const maihumap = new MaiHuMap(mapContainerRef.current);
-    maihumap.add_ambulance(amb);
+    // maihumap.add_ambulance(amb);
     // maihumap.active_hospital(hosp);
+    amb.then(e => maihumap.add_ambulance(e));
+    hosp.then(e => maihumap.add_hospital(e));
 
     setMapController(maihumap.controller);
   }, []);
