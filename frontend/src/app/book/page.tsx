@@ -16,7 +16,12 @@ import axios from "axios";
 async function get_ambulances() {
   try {
     const resp = await axios.get("http://localhost:8000/ambulances");
-    return resp.data.data.map((e: any) => new Marked([e[0], e[1]], e[4]))
+    let ambs =  resp.data.data.map((e: any) => {
+      let m = new Marked([e[0], e[1]], e[4]);
+      m.setData(e[3]);
+      return m;
+    });
+    return ambs;
   } catch (error) {
     console.log(error);
   }
@@ -35,6 +40,8 @@ export default function Page() {
   const [pickupMode, setPickupMode] = useState(false);
   const [destinationMode, setDestinationMode] = useState(false);
   const [ambulanceMode, setAmbulanceMode] = useState(false);
+
+  const [cost, setcost] = useState<number | null>(null);
 
   const apiKey = "CCCHWfgPGpwfSG6DPf51";
 
@@ -134,13 +141,15 @@ export default function Page() {
           </div>
         </div>
         <div className="banner">
+          {(cost === null) ? <></> : <div className="py-10 text-black text-xl text-center">
+            Approximate cost: {cost.toFixed(2)} Rs
+            </div>}
           <div className="banner_info">
-            <Button onClick={() => {
+            <Button  onClick={() => {
               if (maihumap === null) {
-                console.log('caaaaant')
                 return;
               }
-              console.log(maihumap.get_dist())
+              setcost(maihumap.get_cost());
             }}>Book An Ambulance</Button>
           </div>
         </div>

@@ -62,6 +62,7 @@ class Marked {
     color: string;
     selected_color: string;
     pos: [number, number];
+    data: any = null;
 
     constructor(
         pos: [number, number],
@@ -73,6 +74,10 @@ class Marked {
         this.title = title;
         this.color = color;
         this.selected_color = selected_color;
+    }
+
+    setData(data: any) {
+        this.data = data;
     }
 
     select(map: maplibregl.Map) {
@@ -194,7 +199,7 @@ class MaiHuMap {
         }
     }
 
-    get_dist() {
+    get_cost() {
         if (this.active_ambulance === null || this.active_hospital === null || this.patient_marker === null) {
             throw Error('helo');
         }
@@ -209,7 +214,9 @@ class MaiHuMap {
         // const d1 = get_dist2([p1.lng, p1.lat], [p2.lng, p2.lat]);
         const d1 = get_dist3(p1.lat, p1.lng, p3.lat, p3.lng);
         const d2 = get_dist3(p3.lat, p3.lng, p2.lat, p2.lng);
-        return d1 + d2;
+        const dist = d1 + d2;
+        const rate = this.ambulance_markers[this.active_ambulance].data;
+        return dist * rate;
     }
 }
 
