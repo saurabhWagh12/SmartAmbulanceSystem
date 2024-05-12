@@ -1,12 +1,16 @@
 "use client";
+
 import React from "react";
 import Lottie from "lottie-react";
 import ambulancelottie from "./ambulance-lottie.json";
 import doctorlottie from "./doctor-lottie.json";
+import Navbar from "../components/Navbar";
+
 export default function AboutUs() {
 	return (
 		<div>
-			<section id="about-us" className="py-16 bg-white">
+			<Navbar />
+			<section id="about-us" className="py-32 bg-white">
 				<div className="container mx-auto">
 					<div className="flex flex-col items-center justify-center mb-16">
 						<h2 className="text-3xl font-bold mb-4 bg-gradient-to-r from-orange-300 to-orange-500 text-white p-4 rounded-lg shadow-lg">
