@@ -8,4 +8,5 @@ admin.site.register(Individual_Owner)
 admin.site.register(Order)
 admin.site.register(Assigned)
 admin.site.register(Request)
+admin.site.register(Hospital)
 

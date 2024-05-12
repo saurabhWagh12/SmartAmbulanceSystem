@@ -263,3 +263,20 @@ def getAllDrivers(request):
         return Response({'status': 400, 'message': 'Fleet Owner or User does not exist'})
     except Exception as e:
         return Response({'status': 400, 'message': 'Error: ' + str(e)})
+
+@api_view(['GET'])
+def ambulances(request):
+    try:
+        li = []
+        ambulances = Ambulance.objects.all()
+        for ambulance in ambulances:
+            l = [ambulance.longi,ambulance.lati,ambulance.type,ambulance.cost,ambulance.vehicle_number]
+            li.append(l)
+
+        individual = Individual_Owner.objects.all()
+        for indi in individual:
+            l = [indi.longi,indi.lati,indi.type,indi.cost,indi.vehicle_number]
+            li.append(l)
+        return Response({'status':200,'data':li})
+    except Exception as e:
+        return Response({'status': 400, 'message': 'Error: ' + str(e)})

@@ -24,7 +24,7 @@ class Driver(models.Model):
     user = models.OneToOneField(User,on_delete=models.CASCADE,null=False,blank=False)
     phone_number = PhoneNumberField(null=False,blank=False)
     license = models.FileField(upload_to='liscance/',null=False,blank=False)
-    underFleet = models.ForeignKey(Fleet_Owner,on_delete=models.CASCADE,null=True,blank=True,default=None)
+    underFleet = models.ForeignKey(Fleet_Owner,on_delete=models.CASCADE,null=False,blank=False,default=None)
     busy = models.BooleanField(default=False)
     loggedIn = models.BooleanField(default=False)
     def __str__(self):
@@ -61,9 +61,16 @@ class Individual_Owner(models.Model):
     documents = models.FileField(upload_to='ambulance_documents/', null=False, blank=False)
     workingStatus = models.BooleanField(default=False)
     city = models.CharField(max_length=100,null=False,blank=False)
+    longi = models.FloatField(default=0.0,null=False,blank=False)
+    lati = models.FloatField(default=0.0,null=False,blank=False)
     def __str__(self):
         return self.user.username
 
+
+class Hospital(models.Model):
+    name = models.CharField(max_length=300)
+    longi = models.FloatField(default=0.0,null=False,blank=False)
+    lati = models.FloatField(default=0.0,null=False,blank=False)
 
 class Order(models.Model):
     ambulance = models.ForeignKey(Ambulance,on_delete=models.CASCADE,null=False,blank=False)
